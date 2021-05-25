@@ -13,30 +13,14 @@ import Header from './components/header/header.component'
 import { selectCurrentUser } from './redux/user/user.selectors'
 
 import { auth, createUserProfileDocument } from './firebase/firebase.utils'
-import { setCurrentUser } from './redux/user/user.actions'
+import { checkUserSection, setCurrentUser } from './redux/user/user.actions'
 
 class App extends React.Component {
   unsubscribeFromAuth = null
 
   componentDidMount() {
-    const {setCurrentUser } = this.props;
-
-    this.unsubscribeFromAuth = auth.onAuthStateChanged(async userAuth => {
-      if (userAuth) {
-        const userRef = createUserProfileDocument(userAuth);
-
-        (await userRef).onSnapshot(snapshot => {
-          setCurrentUser({
-            currentUser: {
-              id: snapshot.id,
-              ...snapshot.data()
-            }
-          });
-        });
-      } else {
-        setCurrentUser(userAuth);
-      }
-    })
+    const { checkUserSection } = this.props;
+    checkUserSection()
   }
 
   componentWillUnmount() {
@@ -63,7 +47,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  setCurrentUser: user => dispatch(setCurrentUser(user))
+  checkUserSection: () => dispatch(checkUserSection())
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);
