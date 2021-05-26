@@ -12,8 +12,7 @@ import CheckoutPage from './pages/checkout/checkout.component';
 import Header from './components/header/header.component'
 import { selectCurrentUser } from './redux/user/user.selectors'
 
-import { auth, createUserProfileDocument } from './firebase/firebase.utils'
-import { checkUserSection, setCurrentUser } from './redux/user/user.actions'
+import { checkUserSection } from './redux/user/user.actions'
 
 class App extends React.Component {
   unsubscribeFromAuth = null

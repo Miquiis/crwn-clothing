@@ -3,7 +3,8 @@ import { addItemToCart, clearItemFromCart, removeItemToCart } from './cart.utils
 
 const INTIAL_STATE = {
     hidden: true,
-    cartItems: []
+    cartItems: [],
+    error: ''
 };
 
 const cartReducer = (state = INTIAL_STATE, action) => {
@@ -27,6 +28,18 @@ const cartReducer = (state = INTIAL_STATE, action) => {
             return {
                 ...state,
                 cartItems: removeItemToCart(state.cartItems, action.payload)
+            }
+        case CartActionTypes.CLEAR_CART_SUCCESS:
+            return {
+                ...state,
+                hidden: true, 
+                cartItems: [],
+                error: ''
+            }
+        case CartActionTypes.CLEAR_CART_FAILURE:
+            return {
+                ...state,
+                error: action.payload
             }
         default:
             return state;

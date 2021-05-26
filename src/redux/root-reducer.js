@@ -6,6 +6,7 @@ import userReducer from './user/user.reducer';
 import cartReducer from './cart/cart.reducer';
 import shopReducer from './shop/shop.reducer';
 import directoryReducer from './directory/directory.reducer';
+import signUpReducer from './sign-up/sign-up.reducer';
 
 const persistConfig = {
     key: 'root',
@@ -17,6 +18,7 @@ const rootReducer = combineReducers({
     user: userReducer,
     cart: cartReducer,
     shop: shopReducer,
+    signup: signUpReducer,
     directory: directoryReducer
 })
 
